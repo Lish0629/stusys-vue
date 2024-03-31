@@ -6,13 +6,13 @@
           <el-aside width="200px">
           <!--侧边栏区域-->
             <el-menu router>
-              <el-menu-item index="/home/student-manage">学生管理</el-menu-item>
-              <el-menu-item index="/home/course-manage">课程管理</el-menu-item>
-              <el-menu-item index="/home/grade">成绩管理</el-menu-item>
+              <el-menu-item index="/student-manage">学生管理</el-menu-item>
+              <el-menu-item index="/course-manage">课程管理</el-menu-item>
+              <el-menu-item index="/grade-manage">成绩管理</el-menu-item>
             </el-menu>
           </el-aside>
           <el-main>
-            Main
+            <RouterView></RouterView>
           </el-main>
         </el-container>
     </el-container>

@@ -1,8 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import Student from '../components/Student.vue'
-import Grade from '../components/Grade.vue'
-import Course from '../components/Course.vue'
+import Student from '../components/home/Student.vue'
+import Grade from '../components/home/Grade.vue'
+import Course from '../components/home/Course.vue'
 
 const routes = [
   {

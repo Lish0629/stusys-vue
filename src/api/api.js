@@ -1,12 +1,13 @@
 import axios from 'axios';
 
+
 export async function fetchData(mainUrl){
   try {
-    const response = await axios.get('/api/${mainUrl}');
+    const response = await axios.get(`${mainUrl}`);
     // 更新响应式对象中的数据
     // 如果只有一行代码的时候，不会被vue认为是array，所以需要特殊处理
     // 观察结构发现应该赋值data.data
-    return Array.isArray(response.data.data) ? response.data.data : [response.data.data]; 
+    return Array.isArray(response.data) ? response.data : [response.data]; 
   }
   catch (error) {  
     console.error(error);  

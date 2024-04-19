@@ -1,41 +1,58 @@
 <template>
   <h1>student</h1>
-  <el-table :data="tableData" style="width: 100%">
-    <el-table-column prop="date" label="Date" width="180" />
-    <el-table-column prop="name" label="Name" width="180" />
-    <el-table-column prop="address" label="Address" />
-  </el-table>
+  <div>
+    <el-table :data="tableData.data" style="width: 100%">
+      <el-table-column prop="studentId" label="Id" style="width: 15%" />
+      <el-table-column prop="name" label="Name" style="width: 15%" />
+      <el-table-column prop="gender" label="Gender" style="width: 15%" />
+      <el-table-column prop="age" label="Age" style="width: 15%" />
+      <el-table-column prop="phoneNumber" label="Phone" style="width: 15%" />
+      <el-table-column prop="classId" label="classid" />
+    </el-table>
+  </div>
 </template>
 
 <script>
+// 使用 reactive 创建响应式对象
+// 使用 onMounted 生命周期函数
+import { reactive,onMounted } from 'vue'; 
+import {fetchData} from '../../api/api';
+import axios from 'axios';
 export default {
   name: 'Student',
-  data(){
-    return{
-      tableData : [
-      {
-        date: '2016-05-03',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles',
-      },
-      {
-        date: '2016-05-02',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles',
-      },
-      {
-        date: '2016-05-04',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles',
-      },
-      {
-        date: '2016-05-01',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles',
-      },
-    ]
+  setup() {
+    // 使用 reactive 创建响应式对象
+    const tableData = reactive({
+      data: []
+    });
+
+    onMounted(async() => {
+      try {
+        tableData.data=await fetchData('http://localhost:8087/user/findAll');
+        console.log(await fetchData('http://localhost:8087/user/findAll'));
+        const response = await axios.get('http://localhost:8087/user/findAll');
+        console.log(response)
+        const response2 = await axios.get('/api/user');
+        console.log(response2)
+      } catch(error){
+        alert(error.message);
+      }
+    });
+
+
+
+    //测试代码
+    const showAlert = () => {
+      console.log(tableData);
+      alert(JSON.stringify(tableData, null, 2));
+    };
+
+    // 返回需要在模板中使用的响应式对象和方法
+    return {
+      tableData,
+      showAlert
+    };
   }
-}
 };
 
 

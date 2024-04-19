@@ -29,7 +29,8 @@ export default {
 
     onMounted(async() => {
       try {
-        tableData.data=await fetchData('user');
+        tableData.data=await fetchData('/api/user');
+
       } catch(error){
         alert(error.message);
       }

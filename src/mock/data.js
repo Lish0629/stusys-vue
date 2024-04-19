@@ -18,8 +18,4 @@ const data = Mock.mock({
 });
 // 生成10个随机数据
 
-Mock.mock('/api/user', {
-    'status': 200, // HTTP 状态码  
-    'message': 'success', // 自定义的消息
-    'data':data.data //数据
-});
+Mock.mock('/api/user', 'get', data.data);

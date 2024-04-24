@@ -22,8 +22,8 @@
       <el-table-column prop="classId" label="classid" style="width: 15%"/>
       <el-table-column label="Operations" style="width:10%">
         <template v-slot="scope">
-          <el-button @click="delRow(scope.row)">修改</el-button>
-          <el-button>删除</el-button>
+          <el-button >修改</el-button>
+          <el-button @click="delRow(scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -33,9 +33,8 @@
 <script>
 // 使用 reactive 创建响应式对象
 // 使用 onMounted 生命周期函数
-import { reactive,onMounted } from 'vue'; 
-import {fetchData} from '../../api/api';
-import axios from 'axios';
+import { reactive,onMounted,ref } from 'vue'; 
+import {fetchData,delData} from '../../api/api';
 export default {
   name: 'Student',
   setup() {
@@ -46,8 +45,8 @@ export default {
 
     onMounted(async() => {
       try {
-        tableData.data=await fetchData('http://localhost:8087/user/findAll');
-        console.log(await fetchData('http://localhost:8087/user/findAll'));
+        tableData.data=await fetchData('http://localhost:8087/student/findAll');
+        console.log(tableData.data);
       } catch(error){
         alert(error.message);
       }
@@ -57,13 +56,18 @@ export default {
       console.log(tableData);
       alert(JSON.stringify(tableData, null, 2));
     };
-    const delRow=()=>{
+    const delRow=async(row)=>{
 
+      console.log('删除'+row.studentId);
+      delData('http://localhost:8087/student/del',row.studentId);
+      tableData.data = tableData.data.filter(item => item.studentId !== row.studentId);
+      //tableData.data=await fetchData('http://localhost:8087/student/findAll');
     }
     // 返回需要在模板中使用的响应式对象和方法
     return {
       tableData,
-      showAlert
+      showAlert,
+      delRow
     };
   }
 };

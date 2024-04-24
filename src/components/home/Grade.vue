@@ -8,6 +8,12 @@
       <el-table-column prop="age" label="Age" style="width: 15%" />
       <el-table-column prop="phone" label="Phone" style="width: 15%" />
       <el-table-column prop="classid" label="classid" />
+      <el-table-column label="Operations" style="width:10%">
+        <template v-slot="scope">
+          <el-button>修改</el-button>
+          <el-button @click="delRow(scope.row)">删除</el-button>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
@@ -36,7 +42,9 @@ export default {
       }
     });
 
-
+    const delRow=(row)=>{
+      console.log('删除'+row.id);
+    }
 
     //测试代码
     const showAlert = () => {
@@ -47,7 +55,8 @@ export default {
     // 返回需要在模板中使用的响应式对象和方法
     return {
       tableData,
-      showAlert
+      showAlert,
+      delRow
     };
   }
 };

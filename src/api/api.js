@@ -14,3 +14,14 @@ export async function fetchData(mainUrl){
     throw new Error('请求失败: ' + error.message); // 重新抛出错误，以便调用者可以处理  
   }  
 }
+
+export async function delData(mainUrl,id){
+  try {
+    console.log(`${mainUrl}?id=${id}`);
+    await axios.get(`${mainUrl}?id=${id}`);
+  }
+  catch (error) {  
+    console.error(error);  
+    throw new Error('删除失败: ' + error.message); // 重新抛出错误，以便调用者可以处理  
+  }  
+}

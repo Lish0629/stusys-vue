@@ -10,52 +10,58 @@
       <el-table-column prop="classid" label="classid" />
       <el-table-column label="Operations" style="width:10%">
         <template v-slot="scope">
-          <el-button>修改</el-button>
-          <el-button @click="delRow(scope.row)">删除</el-button>
+          <div>
+
+            <!-- 当行处于非编辑状态时显示修改按钮 -->
+            <el-button v-if="!scope.row.isEditing" @click="scope.row.isEditing = true">修改</el-button>
+            <el-button v-if="!scope.row.isEditing" @click="delRow(scope.row)">删除</el-button>
+            <!-- 当行处于编辑状态时显示保存和取消按钮 -->
+            <el-button v-if="scope.row.isEditing" @click="saveChange(scope.row)">保存</el-button>
+            <el-button v-if="scope.row.isEditing" @click="scope.row.isEditing = false">取消</el-button>
+          </div>
         </template>
       </el-table-column>
     </el-table>
   </div>
 </template>
-
 <script>
-// 使用 reactive 创建响应式对象
-// 使用 onMounted 生命周期函数
-import { reactive,onMounted } from 'vue'; 
-import {fetchData} from '../../api/api';
-
+import { reactive, onMounted, ref } from 'vue';
+import { fetchData } from '../../api/api';
 
 export default {
   name: 'Grade',
   setup() {
-    // 使用 reactive 创建响应式对象
     const tableData = reactive({
       data: []
     });
 
     onMounted(async() => {
       try {
-        tableData.data=await fetchData('/api/user');
-
-      } catch(error){
+        const response = await fetchData('/api/user');
+        tableData.data = response.map(item => ({
+          ...item,
+          isEditing: false // 默认设置为false，显示修改和删除按钮
+        }));
+      } catch (error) {
         alert(error.message);
       }
     });
 
-    const delRow=(row)=>{
-      console.log('删除'+row.id);
-    }
+    const delRow = (row) => {
 
-    //测试代码
-    const showAlert = () => {
-      console.log(tableData);
-      alert(JSON.stringify(tableData, null, 2));
+      console.log('删除' + row.id);
+    };
+
+    const saveChange = (row) => {
+      // 这里应该是保存更改的逻辑
+      // 例如，您可以在这里更新row对象的数据，并将其发送到服务器
+      row.isEditing = false; // 保存后退出编辑状态
     };
 
     // 返回需要在模板中使用的响应式对象和方法
     return {
       tableData,
-      showAlert,
+      saveChange,
       delRow
     };
   }

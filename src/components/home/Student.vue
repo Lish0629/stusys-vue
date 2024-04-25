@@ -61,7 +61,6 @@ export default {
       console.log('删除'+row.studentId);
       delData('http://localhost:8087/student/del',row.studentId);
       tableData.data = tableData.data.filter(item => item.studentId !== row.studentId);
-      //tableData.data=await fetchData('http://localhost:8087/student/findAll');
     }
     // 返回需要在模板中使用的响应式对象和方法
     return {

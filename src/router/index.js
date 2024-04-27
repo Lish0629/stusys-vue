@@ -4,6 +4,7 @@ import Student from '../components/home/Student.vue'
 import Grade from '../components/home/Grade.vue'
 import Course from '../components/home/Course.vue'
 
+
 const routes = [
   {
     path: '/',
@@ -23,6 +24,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   }
+  
 ]
 
 const router = createRouter({

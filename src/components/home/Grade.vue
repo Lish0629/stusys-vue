@@ -3,15 +3,27 @@
     <h1>Grade</h1>
     <el-table :data="tableData.data" style="width: 100%">
       <el-table-column prop="id" label="Id" style="width: 15%" />
-      <el-table-column prop="name" label="Name" style="width: 15%" />
-      <el-table-column prop="gender" label="Gender" style="width: 15%" />
+      <el-table-column prop="name" label="Name" style="width: 15%">
+        <template v-slot="scope">
+          <span v-if="!scope.row.isEditing">{{ scope.row.name }}</span>
+          <el-input v-else v-model="scope.row.name"/>
+        </template>
+      </el-table-column>
+      <el-table-column prop="gender" label="Gender" style="width: 15%">
+        <template v-slot="scope">
+          <span v-if="!scope.row.isEditing">{{ scope.row.gender }}</span>
+          <el-select v-else v-model="scope.row.gender" >
+            <el-option label="Male" value="1"></el-option>
+            <el-option label="Female" value="0"></el-option>
+          </el-select>
+        </template>
+      </el-table-column>
       <el-table-column prop="age" label="Age" style="width: 15%" />
       <el-table-column prop="phone" label="Phone" style="width: 15%" />
       <el-table-column prop="classid" label="classid" />
       <el-table-column label="Operations" style="width:10%">
         <template v-slot="scope">
           <div>
-
             <!-- 当行处于非编辑状态时显示修改按钮 -->
             <el-button v-if="!scope.row.isEditing" @click="scope.row.isEditing = true">修改</el-button>
             <el-button v-if="!scope.row.isEditing" @click="delRow(scope.row)">删除</el-button>
@@ -39,7 +51,7 @@ export default {
       try {
         const response = await fetchData('/api/user');
         tableData.data = response.map(item => ({
-          ...item,
+          ...item,//遍历数据，添加一个属性
           isEditing: false // 默认设置为false，显示修改和删除按钮
         }));
       } catch (error) {

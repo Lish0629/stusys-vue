@@ -18,4 +18,4 @@ const data = Mock.mock({
 });
 // 生成10个随机数据
 
-Mock.mock('/api/user', 'get', data.data);
+Mock.mock('http://localhost:8087/api/user', 'get', data.data);

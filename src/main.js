@@ -10,11 +10,11 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
 
-
 var app=createApp(App)
     .use(store)
     .use(router)
     .use(ElementPlus)
+
 
 //vue3中导入axios
 app.mount('#app')

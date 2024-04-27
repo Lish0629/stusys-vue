@@ -1,5 +1,5 @@
 <template>
-  <div class="common-layout" style="height: 500px">
+  <div class="common-layout" >
     <el-container>
         <el-header>Header</el-header>
         <el-container>
@@ -9,6 +9,7 @@
               <el-menu-item index="/student-manage">学生管理</el-menu-item>
               <el-menu-item index="/course-manage">课程管理</el-menu-item>
               <el-menu-item index="/grade-manage">成绩管理</el-menu-item>
+              <el-menu-item index="/map-manage">地图展示</el-menu-item>
             </el-menu>
           </el-aside>
           <el-main>
@@ -27,20 +28,27 @@ export default {
 }
 </script>
 
-<style>
-.common-layout .el-header{
-  background-color: rgb(40, 34, 47);
-  color: rgb(255, 0, 0);
+<style lang="scss">
+.common-layout {
+  .el-header {
+    background-color: rgb(40, 34, 47);
+    color: rgb(255, 0, 0);
+  }
 
-}
-.common-layout .el-aside{
-  background-color: rgb(27, 134, 134);
-  
-  
-}
+  .el-aside {
+    background-color: rgb(27, 134, 134);
+  }
 
-.common-layout .el-main{
-  background-color: rgb(199, 181, 216);
+  .el-main {
+    background-color: rgb(199, 181, 216);
+  }
 
+  // 选择第二个 .el-container 元素，因为 .el-container 是 .common-layout 的直接子元素
+  .el-container:nth-child(2) {
+    // 使用视口高度减去头部高度来设置容器高度
+    height: calc(100vh - 60px);
+    // 使用 Flexbox 布局让子元素（侧边栏和主要内容区域）可以伸缩填满空间
+    display: flex;
+  }
 }
 </style>

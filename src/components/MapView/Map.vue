@@ -13,13 +13,16 @@ import MapView from '@arcgis/core/views/MapView.js'
 
 
 const apiKey="AAPKa8e2d506cec146d3a6b60637e13c2073m2lceDibabKg5Js9MSf43_-jxN0hymP9WLJzm3KLrDVStqwgnzr7coB5VCityoZE"
-const basemapEnum = "arcgis/streets";
 
+
+//初始化地图函数
 const initMap = () => {
+  //创建一个地图
   const map = new Map({
     basemap: 'osm'
   });
 
+  //创建一个底图容器
   const view = new MapView({
     map: map,
     container: 'map',
@@ -27,6 +30,7 @@ const initMap = () => {
     zoom: 13
   });
 
+  //跳转地图中心
   setTimeout(() => {
     view.goTo({
       center: [104.061982, 30.577203],
@@ -34,6 +38,7 @@ const initMap = () => {
     })
   }, 3000);
 
+  //删除地图默认组件
   view.ui.components=[]
 };
 

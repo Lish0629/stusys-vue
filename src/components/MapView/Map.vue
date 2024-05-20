@@ -6,12 +6,12 @@
     </el-col>
     <el-col :span="4">
       <el-button @click="moveRef">Move</el-button>
-      <el-button @click="moveview">Move2</el-button>
+      <el-button @click="moveview">润去美国</el-button>
     </el-col>
 
   </el-row>
-  
-  <div id="map"><LayerList /><AttributeSearch /></div>
+ 
+  <div id="map"><LayerList /><AttributeSearch /> <CityPanel /><MapTool /></div>
   <link rel="stylesheet" href="https://js.arcgis.com/4.29/esri/themes/light/main.css">
 </template>
 
@@ -27,6 +27,8 @@ import WebTileLayer from '@arcgis/core/layers/WebTileLayer.js'
 import { useStore } from 'vuex';
 import LayerList from '../LayerList.vue'
 import AttributeSearch from '../AttributeSearch.vue'
+import MapTool from '../MapTools.vue'
+import CityPanel from '../CityPanel.vue'
 const apiKey="AAPKa8e2d506cec146d3a6b60637e13c2073m2lceDibabKg5Js9MSf43_-jxN0hymP9WLJzm3KLrDVStqwgnzr7coB5VCityoZE"
 
 //创建一个ref引用将initMap暴露给外部
@@ -37,8 +39,8 @@ const store = useStore();
 const moveview=()=>{
 
     toRaw(viewRef.value).goTo({
-      center: [104.061982, 30.577203],
-      zoom: 15
+      center: [-98.061982, 40.577203],
+      zoom: 5
     })
 }
 

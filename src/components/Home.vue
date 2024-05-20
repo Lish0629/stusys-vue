@@ -1,7 +1,8 @@
 <template>
   <div class="common-layout" >
     <el-container>
-        <el-header>Header</el-header>
+        <el-header>综合信息展示系统
+        </el-header>
         <el-container>
           <el-aside width="200px">
           <!--侧边栏区域-->
@@ -32,7 +33,9 @@ export default {
 .common-layout {
   .el-header {
     background-color: rgb(40, 34, 47);
-    color: rgb(255, 0, 0);
+    color: rgb(255, 255, 255);
+    
+    font-size: 32px;
   }
 
   .el-aside {

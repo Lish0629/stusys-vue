@@ -9,7 +9,7 @@
               <el-menu-item index="/student-manage">学生管理</el-menu-item>
               <el-menu-item index="/course-manage">课程管理</el-menu-item>
               <el-menu-item index="/grade-manage">成绩管理</el-menu-item>
-              <el-menu-item index="/map-manage">地图展示</el-menu-item>
+              <el-menu-item index="/map-show">地图展示</el-menu-item>
             </el-menu>
           </el-aside>
           <el-main>
